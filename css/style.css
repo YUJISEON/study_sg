@@ -156,16 +156,15 @@ main > .fit-div > div {
 .tbl-area .tbl-box table .radio-wrap .radio-box { float: left;}
 .tbl-area .tbl-box table .radio-wrap .select-box { float: left; margin-left: 5px;}
 
-
+.tbl-area .tbl-box table .select-list { margin-left: -10px; }
 .tbl-area .tbl-box table .select-list > * {float: left; margin-left: 10px;}
-.tbl-area .tbl-box table .select-list > *:first-child{margin-left: 0;  width: 200px;}
 .tbl-area .tbl-box table .select-list > .ab { position: relative; padding-left: 30px; }
 .tbl-area .tbl-box table .select-list > .ab > span { position: absolute; left: 0; top: 50%; transform:translateY(-50%) ;  -webkit-transform:translateY(-50%); -o-transform:translateY(-50%); -ms-transform:translateY(-50%); -moz-transform:translateY(-50%);}
 
 
 /**** nice-select ****/
 .select-drop { float: none;  margin: 0px;height: 40px !important; min-width: 180px !important;max-width: 100%;font-weight: 500 !important;color: #000000 !important;padding: 0 15px;background-color: #fff !important;border: 1px solid #e8e8e8 !important;}
-.select-drop .list {width : 100%;max-height: 395px; overflow-y: auto;}
+.select-drop .list {width : 100%; /*max-height: 395px; overflow-y: auto;*/}
 .select-drop.open {  border: 1px solid #1ea292 !important;   box-shadow: 5px 5px 10x 0px rgba(18, 75, 68, 0.3);}
 .select-drop .option:hover, 
 .select-drop .option.focus, 

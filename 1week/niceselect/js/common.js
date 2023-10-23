@@ -60,3 +60,29 @@ function optionChange(type){
     $('#rank_type').niceSelect('update');  
 
 }
+
+
+function updateDays(){
+    console.log('updateDays');
+
+    var selectedYear = $('#s_year').val();
+    var selectedMonth = $('#s_month').val();
+    var selectDay = $('#s_day');
+
+    selectDay.empty();
+    var daysInMonth = new Date(selectedYear, selectedMonth, 0).getDate();
+
+    selectDay.append($('<option>', {
+        value: "",
+        text: "일"
+    }));
+
+    for (var day = 1; day <= daysInMonth; day++) {
+        selectDay.append($('<option>', {
+            value: day,
+            text: day
+        }));
+    }
+
+    selectDay.niceSelect('update');  
+}
