@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motionPath</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">  
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="/js/include.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- add -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css">
+    <script src="js/common.js"></script>
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <main>     
+        <div class="tbl-area">
+            <div class="tbl-wrap">
+                <div class="tit-box">
+                    <h3>테이블 제목</h3>
+                </div>
+                <div class="tbl-box tbl-type2">
+                    <table>
+                        <caption>게시판</caption>
+                        <colgroup>
+                            <col width="200px">
+                            <col width="*">
+                        </colgroup>
+                        <tbody>                                  
+                            <tr>
+                                <th>분류</th>
+                                <td>
+                                    <div class="chk-list clear">
+                                        <div class="radio-box">
+                                            <input type="radio" name="rank" id="rank1" value="1" onclick="optionChange(0);" >
+                                            <label for="rank1">최상위관리자</label>
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" name="rank" id="rank2" value="2" onclick="optionChange(1);" >
+                                            <label for="rank2">부서장</label>
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" name="rank" id="rank3" value="3" onclick="optionChange(2);" >
+                                            <label for="rank3">변호사</label>
+                                        </div>
+                                        <div class="radio-box">
+                                            <input type="radio" name="rank" id="rank4" value="4" onclick="optionChange(3);" >
+                                            <label for="rank4">일반직원</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>부서/직급</th>
+                                <td>
+                                    <div class="select-list clear">
+                                        <div class="wid220 ab">
+                                            <span>부서</span>
+                                            <select name="depart_type" id="depart_type" class="select-drop max220 disabled">                                                                                                                        
+                                                <option value="">선택</option>
+                                            </select>
+                                        </div>
+                                        <div class="wid220 ab">
+                                            <span>직급</span>
+                                            <select name="rank_type" id="rank_type" class="select-drop max220 disabled">
+                                                <option value="">선택</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

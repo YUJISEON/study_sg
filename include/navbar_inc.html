@@ -1,0 +1,22 @@
+<ul id="navbar"  class="depth1"> 
+    <li class="dropdown">
+        <a href="javascript:;" class="active">01.Study - 1Week</a>
+        <ul class="depth2">
+            <li><a href="/1week/niceselect/index.html">1-1.Niceselect 동적 변경</a></li>
+            <li><a href="/1week/animate/index.html">1-2.Animate.css 활용</a></li>
+        </ul>
+    </li>
+</ul>
+
+<script>
+    $(function(){
+        $('.depth1 > li').on({
+            mouseenter : function(){            
+                $(this).find('.depth2').stop().slideDown(400);;
+            },
+            mouseleave : function(){
+                $(this).find('.depth2').stop().slideUp(400);
+            }
+        });
+    })
+</script>
