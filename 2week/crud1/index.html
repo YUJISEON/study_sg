@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motionPath</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">  
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="/js/include.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- add -->
+    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script> <!-- 초성 플러그인 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css">
+    <script src="js/common.js"></script>
+
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <main>     
+        <div class="tbl-area">
+            <div class="tbl-wrap">
+                <div class="tit-box">
+                    <h3>테이블 제목</h3>
+                </div>
+                <div class="tbl-box tbl-type2">
+                    <table class="row_line">
+                        <caption>게시글</caption>
+                        <colgroup>
+                            <col width="200px">
+                            <col width="*">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>수임자<span class="required">*<span>필수입력</span></span></th>
+                                <td>
+                                    <ul id="result_accperson" class="result_body">
+                                        <li data-depart="송무3부" data-rank="소속변호사" data-name="박진" data-val="29">
+                                            <input type="hidden" name="sel_accperson[]" value="29">
+                                            <span>송무3부 소속변호사 박진</span>
+                                            <a href="javascript:;" class="svg order_btn del sel_btn2" onclick="delOrderList(this, 'accperson');" data-val="29">X</a>
+                                        </li>
+                                        <li data-depart="송무1부" data-rank="선임변호사" data-name="오해원" data-val="24">
+                                            <input type="hidden" name="sel_accperson[]" value="24">
+                                            <span>송무1부 선임변호사 오해원</span>
+                                            <a href="javascript:;" class="svg order_btn del sel_btn2" onclick="delOrderList(this, 'accperson');" data-val="24">X</a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:;" class="btns min-w" onclick="openPopup('accperson');">담당자 등록</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>수행자<span class="required">*<span>필수입력</span></span></th>
+                                <td>
+                                    <ul id="result_fulperson" class="result_body">
+                                        <li data-depart="송무2부" data-rank="소속변호사" data-name="배진솔" data-val="23">
+                                            <input type="hidden" name="sel_fulperson[]" value="23">
+                                            <span>송무2부 소속변호사 배진솔</span>
+                                            <a href="javascript:;" class="svg order_btn del sel_btn2" onclick="delOrderList(this, 'fulperson');" data-val="23">X</a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:;" class="btns min-w" onclick="openPopup('fulperson');">담당자 등록</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>보조인<span class="required">*<span>필수입력</span></span></th>
+                                <td>
+                                    <ul id="result_helpperson" class="result_body">
+                                        <li data-depart="마케팅팀" data-rank="사원" data-name="장규진" data-val="27">
+                                            <input type="hidden" name="sel_helpperson[]" value="27">
+                                            <span>마케팅팀 사원 장규진</span>
+                                            <a href="javascript:;" class="svg order_btn del sel_btn2" onclick="delOrderList(this, 'helpperson');" data-val="27">X</a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:;" class="btns min-w" onclick="openPopup('helpperson');">담당자 등록</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 팝업 -->
+
+    <script>
+    $(function(){
+        var ref = [
+            {mem_department: "8", mem_emptype: "4", mem_id: "31", mem_position: "9", mem_username: "최접수"}, 
+            {mem_department: "8", mem_emptype: "2", mem_id: "28", mem_position: "6", mem_username: "설윤아"}, 
+            {mem_department: "8", mem_emptype: "4", mem_id: "30", mem_position: "8", mem_username: "김접수"}, 
+            {mem_department: "5", mem_emptype: "3", mem_id: "29", mem_position: "3", mem_username: "박진"}
+        ]
+    
+        console.log(ref);
+    
+        ref.forEach(function(val, index){	
+            var dis = Hangul.disassemble(val.mem_username, true);
+            var cho = dis.reduce(function (prev, elem) {
+                elem = elem[0] ? elem[0] : elem;
+                return prev + elem;
+            }, "");
+            val.diassembled = cho;
+        })
+
+$("#sval2").on({
+    keyup : function(){					
+        var txt = $(this).val();
+        var txt_cho = Hangul.disassemble(txt).join(""); 
+        var type = $('#pdepart_type').val();
+        var popName = $('#selEmployee').attr('data-name');
+        var idx = 0;  
+        var isHasData = false;
+        var depart = '';
+        var position = '';
+        var condition; // 이름, 초성
+
+        if (txt != '')	{	
+            $('#ser_body tbody tr').remove();
+
+            ref.forEach(function(val, index){
+                str = val.mem_username.toLowerCase();
+                str_cho = val.diassembled;
+                txt = txt.toLowerCase();
+                
+                // 이름 초성구분
+                condition = str.indexOf(txt) > -1 || str_cho.indexOf(txt_cho) > -1;
+
+                if(val.mem_department == type || type == '' ){                
+                    if(condition) {
+                    
+                        switch (val.mem_department) {
+                            case "1":
+                                depart="없음";
+                                break;
+                            case "2":
+                                depart="송무1부";
+                                break;
+                            case "3":
+                                depart="송무2부";
+                                break;
+                            case "4":
+                                depart="송무3부";
+                                break;
+                            case "5":
+                                depart="송무팀";
+                                break;
+                            case "6":
+                                depart="마케팅팀";
+                                break;
+                            case "7":
+                                depart="인사회계팀";
+                                break;
+                            case "8":
+                                depart="계약관리팀";
+                                break;
+                            case "9":
+                                depart="대외협력팀";
+                                break;
+                        }
+
+                        switch (val.mem_position) {
+                            case "1":
+                                position="대표변호사";
+                                break;
+                            case "2":
+                                position="선임변호사";
+                                break;
+                            case "3":
+                                position="소속변호사";
+                                break;
+                            case "4":
+                                position="부장";
+                                break;
+                            case "5":
+                                position="차장";
+                                break;
+                            case "6":
+                                position="과장";
+                                break;
+                            case "7":
+                                position="대리";
+                                break;
+                            case "8":
+                                position="주임";
+                                break;employee2
+                            case "9":
+                                position="사원";
+                                break;
+                        }
+                        
+                        var tag = ``;
+                        tag += `<tr>`
+                        tag += `    <td>${depart}</td>`
+                        tag += `    <td>${position}</td>`
+                        tag += `    <td>${val.mem_username}</td>`
+
+                        // ul li 형태
+                        if( $('#result_'+popName+' li').length ) {
+                            $('#result_'+popName+' li').each(function(index, target){ 
+                                if ( val.mem_id == $(target).data('val') ) { 
+                                    isHasData = true;               
+                                } 
+                            });     
+                        
+                            if ( isHasData ) {
+                                tag += `    <td><a href="javascript:;" class="btns bl wid100 sel_btn off" onclick="toggleSelect(this, '${popName}');" data-depart="${depart}" data-rank="${position}" data-name="${val.mem_username}" data-val="${val.mem_id}">선택취소</a></td>`
+                                isHasData = false;
+                            } else {
+                                tag += `    <td><a href="javascript:;" class="btns bl wid100 sel_btn" onclick="toggleSelect(this, '${popName}')" data-depart="${depart}" data-rank="${position}" data-name="${val.mem_username}" data-val="${val.mem_id}">선택</a></td>`
+                            }
+                        } else {
+                            tag += `    <td><a href="javascript:;" class="btns bl wid100 sel_btn" onclick="toggleSelect(this, '${popName}')" data-depart="${depart}" data-rank="${position}" data-name="${val.mem_username}" data-val="${val.mem_id}">선택</a></td>`
+                        }      
+                    
+                        tag += `</tr>`                                
+                        $('#ser_body tbody').append(tag);					
+                    } 
+                }   
+            });
+        }else{
+            $('#ser_body tbody tr').remove();
+        }
+    }
+});
+        
+    });
+    </script>
+    
+    <div id="selEmployee" class="popup" data-name="">
+        <div class="pop_wrap">
+            <div class="size">
+                <div class="pop_inner">
+                    <div class="pop_title">
+                        <div class="sub_tit">
+                            <h2>담당자 조회</h2>                    
+                        </div>
+                    </div>
+                    <div class="pop_cont">
+                        <div class="search_area">
+                            <div class="searchWrap">
+                                <form method="get" name="popfrm2" id="popfrm2" class="popfrm" action="index.php">
+                                    <table class="searchTable">
+                                        <caption> 게시글검색 </caption>
+                                        <colgroup>
+                                            <col width="10.6%" />
+                                            <col width="39.4%" />
+                                            <col width="10.6%" />
+                                            <col width="39.4%" />
+                                        </colgroup>
+                                        <tbody>
+                                            <tr>
+                                                <th>부서</th>
+                                                <td>
+                                                    <select name="pdepart_type" id="pdepart_type" class="select_drop min100p">
+                                                        <option value="">전체</option>
+                                                        <option value="2">송무1부</option>
+                                                        <option value="3">송무2부</option>
+                                                        <option value="4">송무3부</option>
+                                                        <option value="5">송무팀</option>
+                                                        <option value="6">마케팅팀</option>
+                                                        <option value="7">인사회계팀</option>
+                                                        <option value="8">계약관리팀</option>
+                                                        <option value="9">대외협력팀</option>
+                                                    </select>
+                                                </td>
+                                                <th>이름</th>
+                                                <td>
+                                                    <div class="srch_word">
+                                                        <div class="wte_word clear">
+                                                            <input type="text" name="sval2" id="sval2" class="sval" value="" placeholder="예: ㅎㄱㄷ">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                               
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tbl-area">
+                            <div class="tbl-wrap">
+                                <div class="tbl-box scroll-y">                                						
+                                    <table id="ser_body">
+                                        <caption>검색 결과</caption>
+                                        <colgroup>
+                                            <col width="28.333%" />
+                                            <col width="28.333%" />
+                                            <col width="28.333%" />
+                                            <col width="15%" />
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">부서</th>
+                                                <th scope="col">직급</th>
+                                                <th scope="col">이름</th>
+                                                <th scope="col">선택</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" name="dataIdx" id="dataIdx" value="">
+                                </div>                     
+                            </div>        
+                            <!-- tbl_wrap -->
+                            <div class="btnSet">
+                                <a href="javascript:;" class="btn gr" onclick="closePopup();">취소</a>
+                            </div>
+                            <!-- //btnSet -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+</body>
+</html>
+
