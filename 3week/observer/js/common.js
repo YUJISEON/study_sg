@@ -19,6 +19,8 @@ window.onload = function() {
     function getEventList(){
         $.ajax({
             url : 'getList.html',
+            type : 'GET',
+            dataType : 'html',
             success : function(data){
                 let r = data.trim();
                 if(r == "finish" || r === ""){
