@@ -1,0 +1,29 @@
+
+ul {
+list-style: none;
+text-align: center;
+font-weight: bold;
+}
+
+body {
+background-color: #333;
+}
+
+.box-list {
+    width: 100%;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.box-list li {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.box { 
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    background: pink;
+
+}

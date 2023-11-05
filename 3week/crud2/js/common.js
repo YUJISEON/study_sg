@@ -54,8 +54,8 @@ const openPopup = (id, i = "", _this = "") =>{
             $('#target_id').val(idx);
             $('#editRecord').attr('data-idx', idx);
 
-            /*$('.add-btn').hide();
-            $('.edit-btn').show();*/
+            $('.add-btn').hide();
+            $('.edit-btn').show();
             $('.record-type').css("display", "none");
 
             $('.targetType').prop('checked', false); 
@@ -84,8 +84,8 @@ const openPopup = (id, i = "", _this = "") =>{
             $('#target_id').val('');
             $('#editRecord').attr('data-idx', 'add');   
 
-            /*$('.add-btn').show();
-            $('.edit-btn').hide();*/
+            $('.add-btn').show();
+            $('.edit-btn').hide();
             $('.record-type').css("display", "table-row");
             $('.birthday_tr').addClass('on');
             $('#recordType1').prop('checked', true);
@@ -351,54 +351,55 @@ function editRecord(){
             click: function (e) {				
                 var idx = $("#editRecord").attr('data-idx');
                 var type = $("#editRecord").attr('data-type');
+
                 //console.log(idx);
                 //console.log(type);
-
                 if ($('#name').val() == "") {
                     ppAlert('이름을 입력해주세요.');
                     $("#name").focus();
                     return false;
                 }
-
                 if ($('#tel').val() == "") {
                     ppAlert('연락처를 입력해주세요.');
                     $("#tel").focus();
                     return false;
                 }
-
                 if ( type == 'client') {
                     if ($('#birthday').val() == "") {
                         ppAlert('생년월일을 입력해주세요.');
                         $("#birthday").focus();
                         return false;
                     }
-
                     var birthday = $('#birthday').val();     
                     $('#'+type).find('tr').eq(idx).find('.birthday').text(birthday); 
                     $('#'+type).find('tr').eq(idx).find('.edit .btn').attr('data-birthday', birthday);
                 }
-
                 if ($('#email1').val() == "" || $('#email2').val() == "") {
                     ppAlert('이메일을 입력해주세요.');
                     $("#email1").focus();
                     return false;
                 }
-
                 var name = $('#name').val();
                 var tel = $('#tel').val();                  
                 var email1 = $('#email1').val();
                 var email2 = $('#email2').val();
                 var email = email1 + '@' + email2;
+                var $trParents ;
 
-                $('#'+type+'Record').find('tr').eq(idx).find('.name').text(name);
-                $('#'+type+'Record').find('tr').eq(idx).find('.tel').text(tel);                
-                $('#'+type+'Record').find('tr').eq(idx).find('.email').text(email);
-                $('#'+type+'Record').find('tr').eq(idx).find('.address').text(address);
-                $('#'+type+'Record').find('tr').eq(idx).find('.edit .btn').attr('data-name', name);
-                $('#'+type+'Record').find('tr').eq(idx).find('.edit .btn').attr('data-tel', tel);                
-                $('#'+type+'Record').find('tr').eq(idx).find('.edit .btn').attr('data-email1', email1);
-                $('#'+type+'Record').find('tr').eq(idx).find('.edit .btn').attr('data-email2', email2);
+                $('#'+type+'Record').find('tr a').each(function(i, el){
+                    if( $(el).attr('data-idx') == idx ) {
+                        $trParents = $(el).closest('tr');
+                    }    
+                })
                 
+                $trParents.find('.name').text(name);
+                $trParents.find('.tel').text(tel);                
+                $trParents.find('.email').text(email);
+                $trParents.find('.edit .btn').attr('data-name', name);
+                $trParents.find('.edit .btn').attr('data-tel', tel);                
+                $trParents.find('.edit .btn').attr('data-email1', email1);
+                $trParents.find('.edit .btn').attr('data-email2', email2);
+
                 closePopup();    
                 ppAlert('수정되었습니다.');					
             }
@@ -407,7 +408,7 @@ function editRecord(){
 }
 
 // 당사자 정보 추가
-function saveExInfo(){
+function addRecord(){
     ppAlert({
         text: '정보를 추가하시겠습니까?',
         button1: {
@@ -419,13 +420,12 @@ function saveExInfo(){
                 var typeIdx;
                 var add;
                 var birthday;
-
                 $('input[name="recordType"]').each(function(i, el){
                     if( $(el).is(':checked')) {
                         typeIdx = $(el).val();
                     }
-                });
-
+                })
+                //console.log(typeIdx);
                 switch (typeIdx) {
                     case "0":
                         var type="client";
@@ -437,25 +437,23 @@ function saveExInfo(){
                         var type="third";
                         break;
                 }
+                var idx = $('#'+type+'Record tr').length;
                 if ($('#name').val() == "") {
                     ppAlert('이름을 입력해주세요.');
                     $("#name").focus();
                     return false;
                 }
-
                 if ($('#tel').val() == "") {
                     ppAlert('연락처를 입력해주세요.');
                     $("#tel").focus();
                     return false;
                 }
-
                 if ( type == 'client') {
                     if ($('#birthday').val() == "") {
                         ppAlert('생년월일을 입력해주세요.');
                         $("#birthday").focus();
                         return false;
                     }
-
                     birthday = $('#birthday').val();  
                     add =`<td class="birthday">${birthday}</td>`;
                 }
@@ -466,7 +464,14 @@ function saveExInfo(){
                     return false;
                 }
 
-                ppAlert('저장되었습니다.');
+                getHtml3(idx, type, birthday, add, function(_html){
+                    addhtml = _html;
+                    $('#'+type+'Record').append(addhtml);
+                    closePopup(); 
+                }); 	
+
+                ppAlert('추가되었습니다.');		
+
             }
         },
     });
@@ -475,7 +480,6 @@ function saveExInfo(){
 function getHtml3(addIdx, type, birthday, add, callback){
     addIdx = addIdx >= 0  ? addIdx : 0 ;
     //console.log(addIdx);
-
     var name = $('#name').val();
     var tel = $('#tel').val();                  
     var email1 = $('#email1').val();
@@ -485,7 +489,6 @@ function getHtml3(addIdx, type, birthday, add, callback){
     var address1 = $('#address1').val();
     var address2 = $('#address2').val();
     var address = '(' + zipcode + ') ' + address1 + ' ' + address2;
-
     var html =``;
     html +=`
     <tr>                                                            
@@ -500,7 +503,62 @@ function getHtml3(addIdx, type, birthday, add, callback){
             </div>
         </td>
     </tr>`;
-
     callback(html); 
+}
 
+
+
+
+// 전화번호 체크
+function setPhone(obj){
+	//010 //replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, ""); 13자리
+
+    var len = obj.value.length;
+    
+    if(obj.value.search('010') == 0 || obj.value.search('011') == 0){
+
+        // console.log('휴대폰번호 체크');
+        if(/^010/.test(obj.value)){  
+            $(obj).attr('maxlength', 13);          
+            obj.value = obj.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+        } else if(/^011/.test(obj.value)){
+            $(obj).attr('maxlength', 12);
+            obj.value = obj.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,3})(\d{0,3})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, ""); 
+        }
+    }else{
+        if(/^02/.test(obj.value)){ //서울
+            $(obj).attr('maxlength', 12);
+
+            // 가운데 3자리(11자리)
+            obj.value = obj.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{0,2})(\d{0,3})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+            
+            // 가운데 4자리(12자리)
+            if(len == 12){
+                obj.value = obj.value
+                .replace(/[^0-9]/g, '')
+                .replace(/^(\d{0,2})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+            }
+        }else{
+            $(obj).attr('maxlength', 13);
+            
+             // 가운데 3자리(12자리)
+             obj.value = obj.value
+             .replace(/[^0-9]/g, '')
+             .replace(/^(\d{0,3})(\d{0,3})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+
+              // 가운데 4자리(13자리)
+             if(len == 13){
+                obj.value = obj.value
+                .replace(/[^0-9]/g, '')
+                .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+             }
+
+        }
+    }
 }

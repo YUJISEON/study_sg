@@ -347,7 +347,7 @@ table tbody td ul.result_body li .order_btn.del { margin-left: 5px; display: inl
 .popup .tbl-area .tbl-box table .ipt-half span, 
 .popup .tbl-area .tbl-box table .ipt-half span{display: block; float: left; width: 20px; height: 40px; text-align: center; line-height: 40px;}
 .popup .tbl-area .tbl-box table .ipt-half input[type="text"], 
-.popup .tbl-area .tbl-box table .ipt-half input[type="text"]{width: calc(47% - 10px); width: -webkit-calc(47% - 10px); float: left;}
+.popup .tbl-area .tbl-box table .ipt-half input[type="text"]{width: calc(46.5% - 10px); width: -webkit-calc(46.5% - 10px); float: left;}
 .popup .tbl-area .tbl-box table .pop_position .ipt-half > div{float: left; margin-left: 15px;}
 .popup .tbl-area .tbl-box table .pop_position .ipt-half > div:first-child{margin-left: 0;}
 .popup .tbl-area .tbl-box table .pop_position .ipt-half span{float: none; display: inline-block; width: auto;}
