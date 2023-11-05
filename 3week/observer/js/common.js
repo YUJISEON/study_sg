@@ -8,7 +8,7 @@ window.onload = function() {
     // observer.observe(element) - 해당 요소가 화면에 잡히도록 감시
     let observer = new IntersectionObserver((e)=>{
         e.forEach((t)=>{
-            if(t.isIntersecting){
+            if(t.isIntersecting){  
                 getEventList();
             }
         });
@@ -22,10 +22,13 @@ window.onload = function() {
             success : function(data){
                 let r = data.trim();
                 if(r == "finish" || r === ""){
-                    observer.disconnect();
+                    observer.unobserve();
                     return false;
                 }else{
-                    $('.box-list').append(r);
+                    $('.box-list').append(r);                    
+                    el = document.querySelectorAll('.box-list li');
+                    checkPageNo+=10;
+                    observer.observe(el[checkPageNo]);                    
                 }
             },
             error : function(error){
