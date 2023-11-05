@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motionPath</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">  
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="/js/include.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- add -->
+    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script> <!-- 초성 플러그인 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css">
+    <script src="js/common.js"></script>
+
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <main>     
+        <div class="tbl-area">
+            <div class="tbl-wrap">
+                <div class="tit-box tit-box2">
+                    <h3>테이블 제목</h3>
+                    <span class="right">
+                        <a href="javascript:;" class="btn navy small" onclick="openPopup('editRecord')" >당사자 정보 추가</a>
+                    </span>
+                </div>
+                <div class="tbl-box tbl-type2">    
+                    <table class="row_line">
+                        <caption>게시글</caption>
+                        <colgroup>
+                            <col width="200px">
+                            <col width="*">
+                        </colgroup>
+                        <tbody>
+                            <!-- 의뢰인 -->
+                            <tr>
+                                <th class="on">의뢰인</th>
+                                <td class="txt-l clear">
+                                    김건축1 외 3명                                            
+                                    <a href="javascript:;" class="tbl-more" onclick="toggleBlock2('.toggle-tr1', this, 1);"></a>
+                                </td>
+                            </tr>
+                            <tr class="toggle-tr toggle-tr1">
+                                <td colspan="2" class="sub-tbl-area">
+                                    <div class="tbl-box sub-tbl-box scroll-y auto">
+                                        <table>
+                                            <caption>게시글</caption>
+                                            <colgroup>
+                                                <col width="200px">
+                                                <col width="15%">
+                                                <col width="15%">
+                                                <col width="20%">
+                                                <col width="*">
+                                                <col width="200px">
+                                            </colgroup>
+                                        <thead>
+                                                <tr>
+                                                    <th>이름</th>
+                                                    <th>연락처</th>
+                                                    <th>생년월일</th>
+                                                    <th>이메일</th>
+                                                    <th>주소</th>
+                                                    <th>비고</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="clientRecord">
+                                                <tr>                                                
+                                                    <td class="name">김건축1</td>
+                                                    <td class="tel">010-8979-8764</td>
+                                                    <td class="birthday">19861205</td>
+                                                    <td class="email">test1212@naver.com </td>
+                                                    <td class="address txt-l">(05246) 서울 강동구 천호동 338-33 asdasd</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'client', this)" data-name="김건축1" data-tel="010-8979-8764" data-birthday="19861205" data-email1="test1212" data-email2="naver.com" data-zipcode="05246" data-address1="서울 강동구 천호동 338-33" data-address2="asdasd" data-idx="1">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                
+                                                    <td class="name">김건축2</td>
+                                                    <td class="tel">010-1111-1111</td>
+                                                    <td class="birthday">19861212</td>
+                                                    <td class="email">sfawerweer@nate.com </td>
+                                                    <td class="address txt-l">(06228) 서울 강남구 역삼동 781-40 123123123</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'client', this)" data-name="김건축2" data-tel="010-1111-1111" data-birthday="19861212" data-email1="sfawerweer" data-email2="nate.com" data-zipcode="06228" data-address1="서울 강남구 역삼동 781-40" data-address2="123123123" data-idx="21">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                
+                                                    <td class="name">김건축3</td>
+                                                    <td class="tel">010-2312-3132</td>
+                                                    <td class="birthday">19861212</td>
+                                                    <td class="email">test1212123123@nate.com </td>
+                                                    <td class="address txt-l">(28787) 충북 청주시 상당구 방서동 664 123123123</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'client', this)" data-name="김건축3" data-tel="010-2312-3132" data-birthday="19861212" data-email1="test1212123123" data-email2="nate.com" data-zipcode="28787" data-address1="충북 청주시 상당구 방서동 664" data-address2="123123123" data-idx="22">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                
+                                                    <td class="name">김건축4</td>
+                                                    <td class="tel">010-1231-2312</td>
+                                                    <td class="birthday">19861112</td>
+                                                    <td class="email">test121@gmail.com </td>
+                                                    <td class="address txt-l">(03470) 서울 은평구 응암동 675-10 asdasdasdsd</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'client', this)" data-name="김건축4" data-tel="010-1231-2312" data-birthday="19861112" data-email1="test121" data-email2="gmail.com" data-zipcode="03470" data-address1="서울 은평구 응암동 675-10" data-address2="asdasdasdsd" data-idx="27">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- //의뢰인 -->
+                            <!-- 상대방 -->
+                            <tr>
+                                <th>상대방</th>
+                                <td class="txt-l clear">
+                                    우개발 외 2명
+                                    <a href="javascript:;" class="tbl-more" onclick="toggleBlock2('.toggle-tr2', this, 1);"></a>
+                                </td>
+                            </tr>
+                            <tr class="toggle-tr toggle-tr2">
+                                <td colspan="2" class="sub-tbl-area">
+                                    <div class="tbl-box sub-tbl-box scroll-y auto">
+                                        <table>
+                                            <caption>게시글</caption>
+                                            <colgroup>
+                                                <col width="200px">
+                                                <col width="15%">
+                                                <col width="20%">
+                                                <col width="*">
+                                                <col width="200px">
+                                            </colgroup>
+                                        <thead>
+                                                <tr>
+                                                    <th>이름</th>
+                                                    <th>연락처</th>                                                        
+                                                    <th>이메일</th>
+                                                    <th>주소</th>
+                                                    <th>비고</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="otherRecord">
+                                                <tr>                                                          
+                                                    <td class="name">우개발</td>
+                                                    <td class="tel">010-0121-212</td>
+                                                    <td class="email">right12@naver.com</td>
+                                                    <td class="address txt-l">(36242) 경북 봉화군 봉화읍 거촌리 729 121212123123</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'other', this)" data-name="우개발" data-tel="010-0121-212" data-email1="right12" data-email2="naver.com" data-zipcode="36242" data-address1="경북 봉화군 봉화읍 거촌리 729" data-address2="121212123123" data-idx="29">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                          
+                                                    <td class="name">우개발2</td>
+                                                    <td class="tel">010-8564-8676</td>
+                                                    <td class="email">right12@naver.com</td>
+                                                    <td class="address txt-l">(05246) 서울 강동구 천호동 338-46 dfgdfgdfgdfg</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'other', this)" data-name="우개발2" data-tel="010-8564-8676" data-email1="right12" data-email2="naver.com" data-zipcode="05246" data-address1="서울 강동구 천호동 338-46" data-address2="dfgdfgdfgdfg" data-idx="30">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                          
+                                                    <td class="name">테스트12312312</td>
+                                                    <td class="tel">010-1654-6854</td>
+                                                    <td class="email">werwerew12123234234@gmail.com</td>
+                                                    <td class="address txt-l">(06121) 서울 강남구 논현동 204 123123123123123</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'other', this)" data-name="테스트12312312" data-tel="010-1654-6854" data-email1="werwerew12123234234" data-email2="gmail.com" data-zipcode="06121" data-address1="서울 강남구 논현동 204" data-address2="123123123123123" data-idx="33">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- //상대방 -->
+                            <!-- 제3자 -->
+                            <tr>
+                                <th>제3자</th>
+                                <td class="txt-l clear">
+                                    좌개발111222 외 1명
+                                    <a href="javascript:;" class="tbl-more" onclick="toggleBlock2('.toggle-tr3', this, 1);"></a>
+                                </td>
+                            </tr>
+                            <tr class="toggle-tr toggle-tr3">
+                                <td colspan="2" class="sub-tbl-area">
+                                    <div class="tbl-box sub-tbl-box scroll-y auto">
+                                        <table>
+                                            <caption>게시글</caption>
+                                            <colgroup>
+                                                <col width="200px">
+                                                <col width="15%">
+                                                <col width="20%">
+                                                <col width="*">
+                                                <col width="200px">
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>이름</th>
+                                                    <th>연락처</th>
+                                                    <th>이메일</th>
+                                                    <th>주소</th>
+                                                    <th>비고</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="thirdRecord">                                                        
+                                                <tr>                                                          
+                                                    <td class="name">좌개발111222</td>
+                                                    <td class="tel">010-6556-6655</td>
+                                                    <td class="email">left1234@gmail.com</td>
+                                                    <td class="address txt-l">(57638) 전남 구례군 구례읍 봉동리 198-11 567567567</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'third', this)" data-name="좌개발111222" data-tel="010-6556-6655" data-email1="left1234" data-email2="gmail.com" data-zipcode="57638" data-address1="전남 구례군 구례읍 봉동리 198-11" data-address2="567567567" data-idx="31">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>                                                          
+                                                    <td class="name">제3자테스트테스트</td>
+                                                    <td class="tel">010-6848-9798</td>
+                                                    <td class="email">werw3455345345@naver.com</td>
+                                                    <td class="address txt-l">(05323) 서울 강동구 천호동 314-22 123123123123</td>
+                                                    <td class="edit">
+                                                        <div class="btnSet2 clear">
+                                                            <a href="javascript:;" class="btn lime" onclick="openPopup('editRecord', 'third', this)" data-name="제3자테스트테스트" data-tel="010-6848-9798" data-email1="werw3455345345" data-email2="naver.com" data-zipcode="05323" data-address1="서울 강동구 천호동 314-22" data-address2="123123123123" data-idx="34">수정</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- //제3자 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 팝업 -->    
+    <div id="editRecord" class="popup" data-name="">
+        <div class="pop_wrap">
+            <div class="size">
+                <div class="pop_inner">
+                    <div class="pop_title">
+                        <div class="sub_tit">
+                            <h2>당사자 정보</h2>                    
+                        </div>
+                    </div>
+                    <div class="pop_cont">
+                        <form method="get" name="popfrm" id="popfrm" class="popfrm" action="">
+                            <div class="tbl-area">
+                                <div class="tbl-wrap">
+                                    <div class="tbl-box tbl-type2">   
+                                        <table class="row_line">
+                                            <caption>게시글</caption>
+                                            <colgroup>
+                                                <col width="200px">
+                                                <col width="*">
+                                            </colgroup>
+                                            <tbody>
+                                                <tr class="record-type">
+                                                    <th>구분<span class="required">*<span>필수입력</span></span></th>
+                                                    <td>
+                                                        <div class="chk-list clear">
+                                                            <div class="radio-box">
+                                                                <input type="radio" name="recordType" id="recordType1" value="0" class="targetType" onclick="toggleBlock('.birthday_tr', 0)" checked>
+                                                                <label for="recordType1">의뢰인 정보</label>
+                                                            </div>
+                                                            <div class="radio-box">
+                                                                <input type="radio" name="recordType" id="recordType2" value="1" class="targetType" onclick="toggleBlock('.birthday_tr')">
+                                                                <label for="recordType2">상대방 정보</label>
+                                                            </div>
+                                                            <div class="radio-box">
+                                                                <input type="radio" name="recordType" id="recordType3" value="2" class="targetType" onclick="toggleBlock('.birthday_tr')">
+                                                                <label for="recordType3">제3자 정보</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>     
+                                                <tr>
+                                                    <th>이름<span class="required">*<span>필수입력</span></span></th>
+                                                    <td>
+                                                        <input type="text" name="name" id="name" value="" class="max220">
+                                                    </td>
+                                                </tr>                                            
+                                                <tr>
+                                                    <th>연락처<span class="required">*<span>필수입력</span></span></th>
+                                                    <td>
+                                                        <input type="text" name="tel" id="tel" value="" class="max220" oninput="setPhone(this);" placeholder="('-')없이 입력">
+                                                    </td>
+                                                </tr>
+                                                <tr class="birthday_tr on">
+                                                    <th>생년월일<span class="required">*<span>필수입력</span></span></th>
+                                                    <td>
+                                                        <input type="text" name="birthday" id="birthday" value="" class="max220" maxlength="8">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>이메일<span class="required">*<span>필수입력</span></span></th>
+                                                    <td>
+                                                        <div class="email-box email-box2 clear max700">
+                                                            <div class="ipt-half clear">
+                                                                <input type="text" name="email1" id="email1" class="email1" value="" />
+                                                                <span>@</span>
+                                                                <input type="text" name="email2" id="email2" class="email2" value="" />
+                                                            </div>
+                                                            <div class="sel-box">
+                                                                <select class="select-drop" name="email_drop" id="email_drop" onchange="insertMail(this, 'email2')">
+                                                                    <option value="">직접입력</option>
+                                                                    <option value="naver.com">naver.com</option>
+                                                                    <option value="gmail.com">gmail.com</option>
+                                                                    <option value="nate.com">nate.com</option>
+                                                                    <option value="daum.com">daum.com</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>                                                
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>           
+                                </div>                 
+                                <!-- tbl_wrap -->
+                                <div class="btnSet">
+                                    <a href="javascript:;" class="btn lime edit-btn" onclick="editRecord();">수정</a>
+                                    <a href="javascript:;" class="btn lime" onclick="saveExInfo();">저장</a>
+                                    <a href="javascript:;" class="btn gr" onclick="closePopup();">취소</a>
+                                </div>
+                                <!-- //btnSet -->   
+                            </div>
+                            <input type="hidden" name="target_id" id="target_id" value="" />
+                            <input type="hidden" name="ex_cmd" id="ex_cmd" value="" />
+                            <input type="hidden" name="mguni_code" id="mguni_code" value="" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</body>
+</html>
+
