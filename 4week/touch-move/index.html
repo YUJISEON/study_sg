@@ -12,45 +12,62 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/MotionPathPlugin.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css">
     <!-- add -->
-    <script src="js/common.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
-    <main>   
-        <ul class="box-list">
-            <li>
-                <div class="box">1</div>
-            </li>
-            <li>
-                <div class="box">2</div>
-            </li>
-            <li>
-                <div class="box">3</div>
-            </li>
-            <li>
-                <div class="box">4</div>
-            </li>
-            <li>
-                <div class="box">5</div>
-            </li>
-            <li>
-                <div class="box">6</div>
-            </li>
-            <li>
-                <div class="box">7</div>
-            </li>
-            <li>
-                <div class="box">8</div>
-            </li>
-            <li>
-                <div class="box">9</div>
-            </li>
-            <li>
-                <div class="box">10</div>
-            </li>
-        </ul>
-    </main>
+    <div class="wrapper">
+        <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+        <div id="mapList" class="map_list max180">
+            <select name="s_keyword" id="s_keyword" class="select-drop slide">
+                <option value="">전체</option>
+                <option value="">확인일 최신 순</option>
+                <option value="">보증금 낮은 순</option>
+                <option value="">보증금 높은 순</option>
+                <option value="">전용면적 넓은 순</option>
+                <option value="">전용면적 좁은 순</option>
+            </select>
+            <ul class="box-list list_wrap">
+                <li>
+                    <div class="box">1</div>
+                </li>
+                <li>
+                    <div class="box">2</div>
+                </li>
+                <li>
+                    <div class="box">3</div>
+                </li>
+                <li>
+                    <div class="box">4</div>
+                </li>
+                <li>
+                    <div class="box">5</div>
+                </li>
+                <li>
+                    <div class="box">6</div>
+                </li>
+                <li>
+                    <div class="box">7</div>
+                </li>
+                <li>
+                    <div class="box">8</div>
+                </li>
+                <li>
+                    <div class="box">9</div>
+                </li>
+                <li>
+                    <div class="box">10</div>
+                </li>
+            </ul>
+        </div> 
+        <div class="map_btns ta">
+            <a href="javascript:;" onclick="toggleMap('', this);" class="map_btn"><span>지도 보기</span></a>
+            <a href="javascript:;" onclick="toggleMap('', this);" class="map_btn on">지도 내 매물 <b>393</b></a>
+        </div>
+    </div>
+    <script src="js/common.js"></script>
 </body>
 </html>
