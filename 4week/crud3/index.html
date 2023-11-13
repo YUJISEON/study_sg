@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>motionPath</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">  
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="/js/include.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- add -->
+    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script> <!-- 초성 플러그인 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css">
+    <script src="js/common.js"></script>
+
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <main>     
+        <div class="tbl-area">
+            <div class="tbl-wrap">
+                <div class="tit-box tit-box2">
+                    <h3>테이블 제목</h3>                    
+                </div>
+                <div class="tbl-box tbl-type2">    
+                    <table class="row_line">
+                        <caption>게시글</caption>
+                        <colgroup>
+                            <col width="200px">
+                            <col width="*">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>작성자</th>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <th>자문시간<span class="required">*<span>필수입력</span></th>
+                                <td>
+                                    <div class="input_wrap">
+                                        <input type="text" name="ahour" id="ahour" value="" class="max100 txt_r" > 시간 
+                                        <input type="text" name="aminute" id="aminute" value="" class="max100 txt_r" > 분
+                                    </div>                                            
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>내용<span class="required">*<span>필수입력</span></th>
+                                <td>
+                                    <textarea name="amemo" id="amemo" cols="30" rows="10"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>첨부파일</th>
+                                <td>
+                                    <div class="fileCheck max500">
+                                        <div class="file_btn">
+                                            <input type="file" name="filename0" id="filename0" class="filename"  value="" onchange="document.getElementById('afilename0').value = this.files[0].name;" />
+                                            <label for="filename0" class="btns">파일선택</label>
+                                        </div>
+                                        <div class="ipt_box">
+                                            <input type="text" name="afilename0" id="afilename0" class="afilename wid100" value="" readonly>
+                                        </div>                                                    
+                                    </div>
+                                    <div class="fileCheck max500">
+                                        <div class="file_btn">
+                                            <input type="file" name="filename1" id="filename1" class="filename"  value="" onchange="document.getElementById('afilename1').value = this.files[0].name;" />
+                                            <label for="filename1" class="btns">파일선택</label>
+                                        </div>
+                                        <div class="ipt_box">
+                                            <input type="text" name="afilename1" id="afilename1" class="afilename wid100" value="" readonly>
+                                        </div>                                                    
+                                    </div>
+                                    <div class="fileCheck max500">
+                                        <div class="file_btn">
+                                            <input type="file" name="filename2" id="filename2" class="filename"  value="" onchange="document.getElementById('afilename2').value = this.files[0].name;" />
+                                            <label for="filename2" class="btns">파일선택</label>
+                                        </div>
+                                        <div class="ipt_box">
+                                            <input type="text" name="afilename2" id="afilename2" class="afilename wid100" value="" readonly>
+                                        </div>                                                    
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btnSet clear">
+                    <span class="right">
+                        <a href="javascript:;" class="btn lime" onclick="addRecord();">작성하기</a>
+                    </span>
+                </div>
+            </div>       
+            <div class="tbl-wrap" id="record_body">
+                <div class="tit_box tit_box2">
+                    <h3 class="sTit">자문이력</h3>
+                </div>
+                <div class="list_wrap">
+                    <ul id="record_wrap">
+                        <li>
+                            <div class="tbl-box tbl-type2">    
+                                <table class="row_line">
+                                    <input type="hidden" name="cnsldt_time1" id="cnsldt_time1_0" value="3">
+                                    <input type="hidden" name="cnsldt_time2" id="cnsldt_time2_0" value="0">
+                                    <input type="hidden" name="post_content" id="post_content0" value="부재중">
+                                    <input type="hidden" name="cnsldt_file" id="cnsldt_file1_0" class="cnsldt_file" value="test.pdf">
+                                    <input type="hidden" name="cnsldt_file" id="cnsldt_file2_0" class="cnsldt_file" value="test.pdf">
+                                    <input type="hidden" name="cnsldt_file" id="cnsldt_file3_0" class="cnsldt_file" value="">
+                                    <caption>게시글</caption>
+                                    <colgroup>
+                                        <col width="200px">
+                                        <col width="*">
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th>작성자</th>
+                                            <td>
+                                                홍길동
+                                                <div class="btnSet2 right">
+                                                    <a href="javascript:;" class="btn lime edit0" onclick="editRecord(0, this)" >수정</a>
+                                                    <a href="javascript:;" class="btn lime toggle_blk blk0 " onclick="saveRecord(0)" >저장</a>
+                                                    <a href="javascript:;" class="btn gr toggle_blk blk" onclick="cancelRecord(0)" >취소</a>
+                                                </div> 
+                                            </td>
+                                        </tr>
+                                        <tr class="edit-record">
+                                            <th>자문시간</th>
+                                            <td>3시간</td>
+                                        </tr>
+                                        <tr class="edit-record">
+                                            <th>내용</th>
+                                            <td class="content">
+                                                <div id="post-content">
+                                                    <p>부재중</p>
+                                                </div>                                        
+                                            </td>
+                                        </tr>
+                                        <tr class="edit-record">
+                                            <th>첨부파일</th>
+                                            <td>
+                                                <ul class="file_list file_list1">
+                                                    <li><a href="/assets/images/admin_images/test.pdf" download="">test.pdf</a></li>
+                                                    <li><a href="/assets/images/admin_images/test.pdf" download="">test.pdf</a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>     
+        </div>
+    </main>
+</body>
+</html>
+

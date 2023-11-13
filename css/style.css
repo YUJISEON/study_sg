@@ -406,6 +406,29 @@ table tbody td ul.result_body li .order_btn.del { margin-left: 5px;}
 
 
 
+.tbl-wrap table td input[type="text"],
+.tbl-wrap table td input[type="password"],
+.tbl-wrap table td input[type="number"] {height:40px; /*padding:0 8px;*/ font-size: 1.4rem; font-weight: 500; color: #444; border-radius: 3px; border: 1px solid #ccc; letter-spacing: -0.3px;}
+.tbl-wrap table td input[type="text"]::placeholder,
+.tbl-wrap table td input[type="password"]::placeholder{opacity:0.5;}
+.tbl-wrap table td select{height:40px;}
+.tbl-wrap table td textarea{width: 99%; border:1px solid #ccc; resize: none; padding: 8px; font-size: 1.4rem; font-weight: 500; color: #444; border-radius: 3px; letter-spacing: -0.3px; }
+
+
+
+.fileCheck{display: block; width: 100%; position: relative; padding-left: 80px; box-sizing: border-box;}
+.fileCheck + .fileCheck { margin-top: 10px;}
+.fileCheck input[type="file"]{width: 1px; height: 1px; position: absolute; left: -9999px; top: 0; opacity: 0; visibility: hidden; filter: alpha(opacity=0); -ms-filter: alpha(opacity=0);}
+.fileCheck .file_btn{width: 75px; position:absolute; left: 0; top: 0;  }
+.fileCheck .ipt_box input { width: 100%;}
+.file_del{margin-top: 10px;}
+.file_del > div{display: inline-block; vertical-align: middle;}
+.file_del .chk_list{margin-left: 10px;}
+
+.btnSet {margin-top:12px; text-align: center;}
+.btnSet .left {float:left;}
+.btnSet .right {float:right;}
+
 .max90 {max-width:90px;}
 .max100 {max-width:100px;}
 .max150 {max-width:150px;}
